@@ -20,7 +20,7 @@ parser.add_argument("--model", type=str, default='t5')  # tested model are gpt2/
 parser.add_argument("--model_name_or_path", default='/media/HD0/T5-Corrector/mengzi-t5-base/checkpoint-5000')
 parser.add_argument("--tokenizer_path", default='/media/HD0/T5-Corrector/mengzi-t5-base')
 parser.add_argument("--template", default='prefix') #manual soft mix prefix
-parser.add_argument('--batch_size', type=int, default=32, help='batch size')
+parser.add_argument('--batch_size', type=int, default=1, help='batch size')
 parser.add_argument('--eval_steps', type=int, default=500, help='eval steps num')
 parser.add_argument("--epoch", default=30)
 parser.add_argument("--wandb", type=bool, default=True)
@@ -239,10 +239,10 @@ def evaluate(prompt_model, dataloader, verbose=True):
         print("dev_acc {}, dev_precision {} dev_recall: {} dev_f1: {}".format(acc, precision, recall, f1), flush=True)
         return generated_sentence, acc, precision, recall, f1
 
-if os.path.exists('./output/{}.txt'.format(args.task)):
-    pass
-else:
-    os.mknod('./output/{}.txt'.format(args.task))
+# if os.path.exists('./output/{}.txt'.format(args.task)):
+#     pass
+# else:
+#     os.mknod('./output/{}.txt'.format(args.task))
 
 # zero-shot test
 if args.zero_shot:
@@ -322,7 +322,7 @@ else:
     print(args)
     print("best_acc {}, best_precision {} best_recall: {} best_f1: {}".format(best_val_acc, best_val_precision, best_val_recall, best_val_f1), flush=True)
     
-    with open('./output//{}.txt'.format(args.task), 'a', encoding='utf-8') as f:
+    with open('./output/{}.txt'.format(args.task), 'a', encoding='utf-8') as f:
         f.write("args.k_shot {}, args.task {}".format(args.k_shot, args.task) + '\n')
         if best_val_acc < acc:
             f.write(f'{args.k_shot}-shot_acc_precision_recall_f1: {acc:.4f} {precision:.4f} {recall:.4f} {f1:.4f}')
