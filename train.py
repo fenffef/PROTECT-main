@@ -17,7 +17,8 @@ parser = argparse.ArgumentParser("")
 parser.add_argument("--lr", type=float, default=5e-5)
 parser.add_argument("--plm_eval_mode", action="store_true")
 parser.add_argument("--model", type=str, default='t5')  # tested model are gpt2/t5
-parser.add_argument("--model_name_or_path", default='/media/HD0/T5-Corrector/Checkpoint/checkpoint-21500')
+parser.add_argument("--model_name_or_path", default='/media/HD0/T5-Corrector/mengzi-t5-base/checkpoint-5000')
+parser.add_argument("--tokenizer_path", default='/media/HD0/T5-Corrector/mengzi-t5-base')
 parser.add_argument("--template", default='prefix') #manual soft mix prefix
 parser.add_argument('--batch_size', type=int, default=32, help='batch size')
 parser.add_argument('--eval_steps', type=int, default=500, help='eval steps num')
